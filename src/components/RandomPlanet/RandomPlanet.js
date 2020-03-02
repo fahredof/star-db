@@ -1,37 +1,64 @@
-import React from "react";
+import React, {Component} from "react";
 import "./RandomPlanet.css";
+import SwapiService from "../../services";
 
-import planet from "./img/planet.png";
+export default class RandomPlanet extends Component {
+    swapiService = new SwapiService();
 
-const RandomPlanet = () => {
-    return (
-        <div className="random-planet jumbotron rounded">
+    state = {
+        planet: {}
+    };
 
-            <img className="planet-image" src={planet} alt="planet"/>
+    constructor() {
+        super();
+        this.updatePlanet();
+    }
 
-            <div className="flex-column">
-                <h3 className="planet-name">Planet Name</h3>
+    onPlanetLoaded = (planet) => {
+        this.setState({planet})
+    };
 
-                <ul className="list-group-flush">
-                    <li className="list-group-item d-flex">
-                        <span className="term">Population</span>
-                        <span className="term">Population</span>
-                    </li>
+    updatePlanet = () => {
+        const id = Math.floor(Math.random() * 25) + 2;
+        this.swapiService
+            .getPlanet(id)
+            .then(this.onPlanetLoaded);
+    };
 
-                    <li className="list-group-item d-flex">
-                        <span className="term">Rotation Period</span>
-                        <span className="term">Rotation Period</span>
-                    </li>
+    render() {
+        const {planet: {id, name, population, rotationPeriod, diameter}} = this.state;
+        console.log(id);
+        return (
+            <div className="random-planet jumbotron rounded">
 
-                    <li className="list-group-item d-flex">
-                        <span className="term">Diameter</span>
-                        <span className="term">Diameter</span>
-                    </li>
-                </ul>
+                <img className="planet-image"
+                     src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
+                     alt="planet"
+                />
+
+                <div className="flex-column">
+                    <h3 className="planet-name">{name}</h3>
+
+                    <ul className="list-group-flush">
+                        <li className="list-group-item d-flex">
+                            <span className="term">Population</span>
+                            <span className="term">{population}</span>
+                        </li>
+
+                        <li className="list-group-item d-flex">
+                            <span className="term">Rotation Period</span>
+                            <span className="term">{rotationPeriod}</span>
+                        </li>
+
+                        <li className="list-group-item d-flex">
+                            <span className="term">Diameter</span>
+                            <span className="term">{diameter}</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
+        );
+    }
+}
 
-        </div>
-    );
-};
-
-export default RandomPlanet;
