@@ -1,0 +1,16 @@
+.error-indicator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: cornflowerblue;
+}
+
+.error-indicator .star {
+    width: 20%;
+    height: 60%;
+}
+
+.error-indicator .boom {
+    font-size: 20px;
+}
