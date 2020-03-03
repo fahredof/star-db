@@ -1,24 +1,52 @@
-import React from "react";
+import React, {Component} from "react";
 import "./ItemList.css";
 
-const ItemList = () => {
-    return (
-        <div className="item-list rounded jumbotron">
-            <ul className="list-group">
-                <li className="list-group-item">
-                    <span className="term">Luke Skywalker</span>
-                </li>
+import SwapiService from "../../services/SwapiService";
 
-                <li className="list-group-item">
-                    <span className="term">R2 D1</span>
-                </li>
+import Spinner from "../Spinner";
 
-                <li className="list-group-item">
-                    <span className="term">Darth Vader</span>
+export default class ItemList extends Component {
+    swapiService = new SwapiService();
+
+    state = {
+        peopleList: null
+    };
+
+    componentDidMount() {
+        this.swapiService
+            .getAllPeople()
+            .then((peopleList) => {
+                this.setState({peopleList});
+            });
+    }
+
+    renderItems(peopleList) {
+        return peopleList.map(({id, name}) => {
+            return (
+                <li
+                    className="list-group-item"
+                    key={id}
+                    onClick={() => this.props.onItemSelected(id)}
+                >
+                    {name}
                 </li>
-            </ul>
-        </div>
-    );
+            );
+        });
+    };
+
+    render() {
+        const {peopleList} = this.state;
+
+        if (!peopleList) {
+            return <Spinner/>
+        }
+
+        const element = this.renderItems(peopleList);
+
+        return (
+            <div className="item-list rounded jumbotron">
+                {element}
+            </div>
+        );
+    }
 };
-
-export default ItemList;

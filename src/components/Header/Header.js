@@ -5,17 +5,17 @@ const Header = () => {
     return (
         <div className="header d-flex">
             <h3 className="">
-                <a href="#">Star DB</a>
+                <button href="#">Star DB</button>
             </h3>
             <ul className="d-flex">
                 <li>
-                    <a href="#">People</a>
+                    <button href="#">People</button>
                 </li>
                 <li>
-                    <a href="#">Planets</a>
+                    <button href="#">Planets</button>
                 </li>
                 <li>
-                    <a href="#">Starships</a>
+                    <button href="#">Starships</button>
                 </li>
             </ul>
         </div>

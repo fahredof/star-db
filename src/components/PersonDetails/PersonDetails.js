@@ -1,36 +1,76 @@
-import React from "react";
+import React, {Component, Fragment} from "react";
 import "./PersonDetails.css";
-import person from "./img/r2d2.png"
 
-const PersonDetails = () => {
-    return (
-        <div className="person-details jumbotron rounded">
+import SwapiService from "../../services/SwapiService";
 
-            <img className="person-image" src={person} alt="person"/>
+import PersonDetailsView from "./PersonDetailsView/PersonDetailsView";
+import Spinner from "../Spinner";
 
-            <div className="flex-column">
-                <h3 className="planet-name">R2-D2</h3>
+export default class PersonDetails extends Component {
+    swapiService = new SwapiService();
 
-                <ul className="list-group-flush">
-                    <li className="list-group-item d-flex">
-                        <span className="term">Gender</span>
-                        <span className="term">Male</span>
-                    </li>
+    state = {
+        person: null,
+        loading: false,
+        attention: true
+    };
 
-                    <li className="list-group-item d-flex">
-                        <span className="term">Birth Year</span>
-                        <span className="term">43</span>
-                    </li>
+    componentDidMount() {
+        this.updatePerson();
+    }
 
-                    <li className="list-group-item d-flex">
-                        <span className="term">Eye Color</span>
-                        <span className="term">Red</span>
-                    </li>
-                </ul>
+    componentDidUpdate(prevProps) {
+        if (this.props.personId !== prevProps.personId) {
+            this.updatePerson();
+        }
+    }
+
+    updatePerson() {
+        const {personId} = this.props;
+
+        if (!personId) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            attention: false
+        });
+
+        this.swapiService
+            .getPerson(personId)
+            .then((person) => {
+                this.setState({
+                    person,
+                    loading: false,
+                    attention: false
+                });
+            })
+    }
+
+    render() {
+        const {person, loading, attention} = this.state;
+
+        const welcomeText = (
+            <div className="attention-block jumbotron rounded">
+                        <span>
+                            Select the person from the list!
+                        </span>
             </div>
+        );
 
-        </div>
-    );
+        const hasData = !(loading || attention);
+
+        const selectText = attention ? welcomeText : null;
+        const spinner = loading ? <div className="jumbotron rounded"><Spinner/></div> : null;
+        const content = hasData ? <PersonDetailsView person={person}/> : null;
+
+        return (
+            <Fragment>
+                {selectText}
+                {spinner}
+                {content}
+            </Fragment>
+        );
+    }
 };
-
-export default PersonDetails;

@@ -23,3 +23,10 @@
 .random-planet .list-group-item .term {
     margin-right: .5rem;
 }
+
+.attention-block {
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 20px;
+    text-align: center;
+}

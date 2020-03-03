@@ -16,7 +16,7 @@ const ErrorIndicator = () => {
         <span>
             something has gone terribly wrong
         </span>
-        <span>
+        <span className="end-stroke">
             (but we already sent the droids)
         </span>
     </div>

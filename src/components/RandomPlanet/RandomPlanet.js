@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import "./RandomPlanet.css";
 
-import SwapiService from "../../services";
+import SwapiService from "../../services/SwapiService";
 
 import Spinner from "../Spinner";
 import PlanetView from "./planetView";
@@ -17,9 +17,13 @@ export default class RandomPlanet extends Component {
         error: false
     };
 
-    constructor() {
-        super();
+    componentDidMount() {
         this.updatePlanet();
+        //this.interval = setInterval(this.updatePlanet, 10000);
+    }
+
+    componentWillUnmount() {
+        //clearInterval(this.interval);
     }
 
     onPlanetLoaded = (planet) => {
@@ -34,12 +38,11 @@ export default class RandomPlanet extends Component {
         return this.setState({
             error: true,
             loading: false,
-
         })
     };
 
     updatePlanet = () => {
-        const id = 1324354657/*Math.floor(Math.random() * 17) + 2*/;
+        const id = Math.floor(Math.random() * 17) + 2;
         this.swapiService
             .getPlanet(id)
             .then(this.onPlanetLoaded)
