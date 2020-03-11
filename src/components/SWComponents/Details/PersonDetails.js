@@ -2,7 +2,8 @@ import React from "react";
 import Record from "../../Record";
 import {withDataDetails} from "../../HOCHelper";
 import ItemDetails from "../../ItemDetails";
-import SwapiContextDetails from "../../HOCHelper/SwapiContextDetails";
+import SwapiContextDetails from "../../HOCHelper/SwapiService";
+import compose from "../../HOCHelper/compose";
 
 const PersonRecord = (Wrapped) => {
     return (props) => {
@@ -23,9 +24,10 @@ const mapMethodsToProps = (swapiService) => {
     }
 };
 
-const PersonDetails = SwapiContextDetails(
-    withDataDetails(PersonRecord(ItemDetails), 1),
-    mapMethodsToProps
-);
+const PersonDetails = compose(
+    SwapiContextDetails(mapMethodsToProps),
+    withDataDetails,
+    PersonRecord
+)(ItemDetails);
 
 export default PersonDetails;

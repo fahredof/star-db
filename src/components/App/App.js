@@ -1,20 +1,9 @@
 import React, {Component} from "react";
 import "./App.css";
-
 import Header from "../Header";
 import RandomPlanet from "../RandomPlanet";
-
-import {PersonList,
-        PlanetList,
-        StarshipList} from "../SWComponents/List";
-
-import {PersonDetails,
-        PlanetDetails,
-        StarshipDetails} from "../SWComponents/Details"
-
-import Row from "../Row";
+import {PeoplePage, PlanetsPage, StarshipsPage} from "../Pages";
 import ErrorIndicator from "../ErrorIndicator";
-
 import SwapiService from "../../services/SwapiService";
 import {SwapiServiceProvider} from "../SwapiServiceContext";
 
@@ -42,19 +31,10 @@ export default class App extends Component {
             <div className="app">
                 <SwapiServiceProvider value={this.swapiService}>
                     <Header/>
-                    <RandomPlanet/>
-                    <Row
-                        LeftRow={<PersonList/>}
-                        RightRow={<PersonDetails/>}
-                    />
-                    <Row
-                        LeftRow={<PlanetList/>}
-                        RightRow={<PlanetDetails/>}
-                    />
-                    <Row
-                        LeftRow={<StarshipList/>}
-                        RightRow={<StarshipDetails/>}
-                    />
+                    <RandomPlanet updateInterval={123456}/>
+                    <PeoplePage/>
+                    <PlanetsPage/>
+                    <StarshipsPage/>
                 </SwapiServiceProvider>
             </div>
         );

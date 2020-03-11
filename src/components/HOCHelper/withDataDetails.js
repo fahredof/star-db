@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-const withDataDetails = (View, itemId) => {
+const withDataDetails = (View) => {
 
     return class extends Component {
         state = {
@@ -21,7 +21,7 @@ const withDataDetails = (View, itemId) => {
         }
 
         updateItem() {
-            const {getData, getImage} = this.props;
+            const {getData, getImage, itemId} = this.props;
             if (!itemId) {
                 return;
             }

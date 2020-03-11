@@ -4,7 +4,7 @@ const Attention = () => {
     return (
         <div className="attention-block jumbotron rounded">
             <span>
-                Select the person from the list!
+                Select the item from the list!
             </span>
         </div>
     )

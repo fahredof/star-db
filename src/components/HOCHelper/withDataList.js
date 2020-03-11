@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Spinner from "../Spinner";
 
-const withData = (View) => {
+const withDataList = (View) => {
     return class extends Component {
         state = {
             itemList: null
@@ -30,4 +30,4 @@ const withData = (View) => {
     };
 };
 
-export default withData;
+export default withDataList;

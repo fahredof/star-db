@@ -11,13 +11,13 @@ export default class ErrorButton extends Component {
         }
 
         return (
-          <div>
-              <button
-                onClick={() => this.setState({error: true})}
-              >
-                  Click
-              </button>
-          </div>
+            <div>
+                <button
+                    onClick={() => this.setState({error: true})}
+                >
+                    Click
+                </button>
+            </div>
         );
     }
 }

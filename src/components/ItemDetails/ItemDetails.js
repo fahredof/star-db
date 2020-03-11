@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import "./ItemDetails.css";
 
 import Spinner from "../Spinner";
-import Attention from "./Attention/index";
+import Attention from "./Attention";
 
 class ItemDetails extends Component {
 

@@ -2,7 +2,8 @@ import React from "react";
 import Record from "../../Record";
 import {withDataDetails} from "../../HOCHelper";
 import ItemDetails from "../../ItemDetails";
-import SwapiContextDetails from "../../HOCHelper/SwapiContextDetails";
+import SwapiContextDetails from "../../HOCHelper/SwapiService";
+import compose from "../../HOCHelper/compose";
 
 const StarshipRecord = (Wrapped) => {
     return (props) => {
@@ -27,9 +28,10 @@ const mapMethodsToProps = (swapiService) => {
     }
 };
 
-const StarshipDetails = SwapiContextDetails(
-    withDataDetails(StarshipRecord(ItemDetails), 13),
-    mapMethodsToProps
-);
+const StarshipDetails = compose(
+    SwapiContextDetails(mapMethodsToProps),
+    withDataDetails,
+    StarshipRecord
+)(ItemDetails);
 
 export default StarshipDetails;

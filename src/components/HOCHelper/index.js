@@ -1,8 +1,11 @@
-import withData from "./withData";
+import withDataList from "./withDataList";
 import withDataDetails from "./withDataDetails";
-import SwapiContextDetails from "./SwapiContextDetails";
+import SwapiContextDetails from "./SwapiService";
+import compose from "./compose";
+
 export {
-    withData,
+    withDataList,
     withDataDetails,
-    SwapiContextDetails
+    SwapiContextDetails,
+    compose
 };

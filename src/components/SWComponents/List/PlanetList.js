@@ -1,7 +1,8 @@
-import {withData} from "../../HOCHelper";
+import {withDataList} from "../../HOCHelper";
 import ItemList from "../../ItemList";
 import {withChildFunction, renderName} from "./withChildFunction";
-import SwapiContextDetails from "../../HOCHelper/SwapiContextDetails";
+import SwapiContextDetails from "../../HOCHelper/SwapiService";
+import compose from "../../HOCHelper/compose";
 
 const mapMethodsToProps = (swapiService) => {
     return {
@@ -9,9 +10,10 @@ const mapMethodsToProps = (swapiService) => {
     }
 };
 
-const PlanetList = SwapiContextDetails(
-    withData(withChildFunction(ItemList, renderName)),
-    mapMethodsToProps
-);
+const PlanetList = compose(
+    SwapiContextDetails(mapMethodsToProps),
+    withDataList,
+    withChildFunction(renderName)
+)(ItemList);
 
 export default PlanetList;

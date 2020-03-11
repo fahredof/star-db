@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Row = ({LeftRow, RightRow}) => {
     return (
@@ -13,5 +14,11 @@ const Row = ({LeftRow, RightRow}) => {
         </div>
     );
 };
+
+Row.propTypes = {
+    LeftRow: PropTypes.node,
+    RightRow: PropTypes.node
+};
+
 
 export default Row;
