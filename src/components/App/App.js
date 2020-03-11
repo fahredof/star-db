@@ -3,10 +3,24 @@ import "./App.css";
 
 import Header from "../Header";
 import RandomPlanet from "../RandomPlanet";
-import PeoplePage from "../PeoplePage";
+
+import {PersonList,
+        PlanetList,
+        StarshipList} from "../SWComponents/List";
+
+import {PersonDetails,
+        PlanetDetails,
+        StarshipDetails} from "../SWComponents/Details"
+
+import Row from "../Row";
 import ErrorIndicator from "../ErrorIndicator";
 
+import SwapiService from "../../services/SwapiService";
+import {SwapiServiceProvider} from "../SwapiServiceContext";
+
 export default class App extends Component {
+    swapiService = new SwapiService();
+
     state = {
         hasError: false
     };
@@ -26,9 +40,22 @@ export default class App extends Component {
 
         return (
             <div className="app">
-                <Header/>
-                <RandomPlanet/>
-                <PeoplePage/>
+                <SwapiServiceProvider value={this.swapiService}>
+                    <Header/>
+                    <RandomPlanet/>
+                    <Row
+                        LeftRow={<PersonList/>}
+                        RightRow={<PersonDetails/>}
+                    />
+                    <Row
+                        LeftRow={<PlanetList/>}
+                        RightRow={<PlanetDetails/>}
+                    />
+                    <Row
+                        LeftRow={<StarshipList/>}
+                        RightRow={<StarshipDetails/>}
+                    />
+                </SwapiServiceProvider>
             </div>
         );
     }
