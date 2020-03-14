@@ -1,8 +1,6 @@
 .person-details {
     display: flex;
     padding: 1rem;
-    margin-left: 30px;
-    margin-right: 30px;
 }
 
 .person-details .person-image {
@@ -25,8 +23,6 @@
 }
 
 .attention-block {
-    margin-left: 30px;
-    margin-right: 30px;
     padding: 20px;
     text-align: center;
 }

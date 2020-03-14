@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 export default class RandomPlanet extends Component {
     static defaultProps = {
-        updateInterval: 20000
+        updateInterval: 200000
     };
 
     static propTypes = {
