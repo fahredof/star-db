@@ -50,7 +50,7 @@ export default class App extends Component {
                         <Header/>
                         <RandomPlanet/>
                         <Switch>
-                            <Route path="/"
+                            <Route path="/star-db/"
                                    exact
                                    render={() => {
                                        return (
